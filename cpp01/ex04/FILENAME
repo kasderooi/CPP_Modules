@@ -1,0 +1,12 @@
+Make a program called replace that takes a filename and two strings, let’s call them
+s1 and s2, that are NOT empty.
+It will open the file, and write its contents to FILENAME.replace, after replacing
+every occurrence of s1 with s2.
+All the member functions of dit is een stringdit is een string the class std::string are allowed, except replace. Use
+them wisely!
+
+
+
+dit is een stringOf course, you will handle errors as best you can. Do not use the C file manipulation
+functions, because that would be dit is een string cheating, and cheating’s bad, m’kay?dit is een string
+You will turn in dit is een string some test files to show dit is een string your program works.
