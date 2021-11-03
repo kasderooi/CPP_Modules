@@ -1,21 +1,24 @@
 #include "scalar.hpp"
 
-int	main( int argc, char** argv ){
-	// int	i;
-	// float f;
-	// char c;
-	double d;
+typedef bool (*checkFuncPoint)( std::string );
+typedef void (*doFuncPoint)( std::string, t_values* );
 
-	if (argc != 2)
+checkFuncPoint checkF[6] = { &checkPseudoFloat, &checkPseudoDouble, &checkFloat, &checkDouble, &checkInt, &checkChar };
+doFuncPoint doF[6] = { &doPseudoFloat, &doPseudoDouble, &doFloat, &doDouble, &doInt, &doChar };
+
+int	main( int argc, char** argv ){
+	t_values input;
+
+	if ( argc != 2 ){
+		std::cout << "give 1 argument" << std::endl;
 		return 1;
-	if ( checkFloat( argv[1] ) )
-		std::cout << "float" << std::endl;
-	if ( checkDouble( argv[1] ) ){
-		d = std::stod (argv[1]);
 	}
-	if ( checkInt( argv[1] ) )
-		std::cout << "int" << std::endl;
-	if ( checkChar( argv[1] ) )
-		std::cout << "char" << std::endl;
+	for ( int i = 0; i < 6; i++ ){
+		if ( ( checkF[i] )( argv[1] ) ) {
+			( doF[i] )( argv[1], &input );
+			break ;
+		}
+	}
+	printBunch( &input );
 	return 0;
 }

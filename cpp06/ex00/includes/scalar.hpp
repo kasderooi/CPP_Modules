@@ -12,19 +12,21 @@ typedef struct s_values
 	double	d;
 }			t_values;
 
-std::string pseudoFloat[3] = { "-inff", "+inff", "nanf" };
-std::string pseudoDouble[3] = { "-inf", "+inf", "nan" };
-
-bool (*funcPoint)( std::string );
-
+bool checkPseudoFloat( std::string argv );
+bool checkPseudoDouble( std::string argv );
 bool checkFloat( std::string argv );
 bool checkDouble( std::string argv );
 bool checkInt( std::string argv );
 bool checkChar( std::string argv );
 
-void doFloat( std::string argv );
-void doDouble( std::string argv );
-void doInt( std::string argv );
-void doChar( std::string argv );
+void doPseudoFloat( std::string argv, t_values *input );
+void doPseudoDouble( std::string argv, t_values *input );
+void doFloat( std::string argv, t_values *input );
+void doDouble( std::string argv, t_values *input );
+void doInt( std::string argv, t_values *input );
+void doChar( std::string argv, t_values *input );
+
+void printBunch( t_values *input );
+
 
 #endif
