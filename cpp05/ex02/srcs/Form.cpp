@@ -72,6 +72,7 @@ void Form::beSigned( Bureaucrat const& worker ) {
 }
 
 void Form::execute( Bureaucrat const & executor ){
+	(void) executor;
 	try {
 		if ( !this->_signed ){
 			throw FormNotSignedException();
@@ -81,8 +82,9 @@ void Form::execute( Bureaucrat const & executor ){
 		}
 		this->executeForm();
 	} catch ( const FormNotSignedException& e ) {
-		throw e;
+		std::cout << e.what() << std::endl;
+		//throw;
 	} catch ( const GradeTooLowException& e ) {
-		throw e;
+		throw;
 	}
 }
