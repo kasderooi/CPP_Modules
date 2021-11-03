@@ -19,13 +19,3 @@ void ShrubberyCreationForm::executeForm( void ) const{
 	myfile << tree;
 	myfile.close();
 }
-
-// void ShrubberyCreationForm::execute(Bureaucrat const & executor) const{
-// 	try{
-// 		this->beSigned(executor);
-// 		write_to_file( this->_target );
-// 	} catch (const Form::GradeTooLowException& e ) {
-// 		std::cout << "ShrubberyCreationForm cannot be signed because the worker's " << e.what() << std::endl;
-// 	}
-// }
-

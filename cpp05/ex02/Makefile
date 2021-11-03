@@ -1,6 +1,6 @@
 NAME		=	NoForm
 SRCDIR		=	srcs
-SRCS		=	main.cpp Bureaucrat.cpp Form.cpp ShrubberyCreationForm.cpp #RobotomyRequestForm.cpp PresidentialPardonForm.cpp
+SRCS		=	main.cpp Bureaucrat.cpp Form.cpp ShrubberyCreationForm.cpp RobotomyRequestForm.cpp PresidentialPardonForm.cpp
 OBJDIR		=	objs
 OBJS		=	$(addprefix $(OBJDIR)/, $(SRCS:.cpp=.o))
 CC			=	clang++

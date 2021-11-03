@@ -80,21 +80,32 @@ void Bureaucrat::decrementGrade( void ){
 	}
 }
 
-void Bureaucrat::signForm( Form const& form ) const{
-	if ( form.getSigned() ){
+void Bureaucrat::signForm( Form& form ) const{
+	try {
+		form.beSigned( *this );
 		std::cout << this->_name << " signs " << form.getName() << std::endl;
-	} else {
-		std::cout << this->_name << " cannot sign " << form.getName() << " because his grade is " << this->_grade << " and the form grade is " << form.getSignGrade() << std::endl;
+	} catch ( const Form::GradeTooLowException& e ) {
+		std::cout << this->_name << " cannot sign " << form.getName() << " because their grade is " << this->_grade << " and the form grade is " << form.getSignGrade() << std::endl;
+	} catch ( const Form::FormAllreadySignedException& e ) {
+		std::cout << this->_name << " cannot sign " << form.getName() << " because the " << e.what() << std::endl;
 	}
 }
 
-void Bureaucrat::executeForm( Form const & form ){
+void Bureaucrat::executeForm( Form const & form ) {
 	try {
-		form.executeForm();
-		std::cout << "the form is executed" << std::endl;
-	} catch ( const Form::FormNotSignedException& e) {
-		std::cout << "the form is not executed because the" << e.what() << std::endl;
-	} catch ( const Form::GradeTooLowException& e) {
-		std::cout << "the form is not executed the" << e.what() << std::endl;
+		form.execute( *this );
+		std::cout << this->getName() << " executes " << form.getName() << std::endl;
+	} catch (const Form::FormNotSignedException& e) {
+		std::cout << this->getName() << " can't execute the form because the " << e.what() << std::endl;
+	} catch (const Form::GradeTooLowException& e) {
+		std::cout << this->getName() << " can't execute the form because their " << e.what() << std::endl;
 	}
+}
+
+const char * Bureaucrat::GradeTooHighException::what () const throw (){
+	return "Grade is too high";
+}
+
+const char * Bureaucrat::GradeTooLowException::what () const throw (){
+	return "Grade is too Low";
 }

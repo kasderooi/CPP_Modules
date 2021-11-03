@@ -27,38 +27,33 @@ class Form {
 	int getExecGrade( void ) const;
 	bool getSigned( void ) const;
 	void beSigned( Bureaucrat const& worker );
-	void execute( Bureaucrat const & executor );
+	void execute( Bureaucrat const & executor ) const;
 	virtual void executeForm( void ) const = 0;
 
+	class FormNotSignedException : public std::exception {
+		public:
+
+		const char * what () const throw ();
+	};
+
+	class FormAllreadySignedException : public std::exception {
+		public:
+
+		const char * what () const throw ();
+	};
+	
 	class GradeTooHighException : public std::exception {
+		public:
 
-		public :
-
-		const char * what () const throw (){
-			return "Grade is too high";
-		}
-
+		const char * what () const throw ();
 	};
 
 	class GradeTooLowException : public std::exception {
-
-		public :
-
-		const char * what () const throw (){
-			return "Grade is too Low";
-		}
-
+		public:
+		
+		const char * what () const throw ();
 	};
 
-	class FormNotSignedException : public std::exception {
-
-		public :
-
-		const char * what () const throw (){
-			return "Form is not signed";
-		}
-
-	};
 };
 
 std::ostream& operator<<( std::ostream& os, Form const& object);

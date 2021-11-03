@@ -60,31 +60,38 @@ std::ostream& operator<<( std::ostream& os, Form const& object){
 }
 
 void Form::beSigned( Bureaucrat const& worker ) {
-	try {
-		if ( worker.getGrade() > this->_signGrade ){
-			throw GradeTooLowException();
-		}
-		this->_signed = true;
-	} catch ( const Form::GradeTooLowException& e ) {
-		std::cout << "ShrubberyCreationForm cannot be signed because the worker's " << e.what() << std::endl;
+	if ( worker.getGrade() > this->_signGrade ){
+		throw GradeTooLowException();
+	} else if ( this->_signed ) {
+		throw FormAllreadySignedException();
 	}
-	worker.signForm( *this );
+	this->_signed = true;
 }
 
-void Form::execute( Bureaucrat const & executor ){
+void Form::execute( Bureaucrat const & executor ) const{
 	(void) executor;
-	try {
-		if ( !this->_signed ){
-			throw FormNotSignedException();
-		}
-		if ( this->_execGrade > executor.getGrade() ){
-			throw GradeTooLowException();
-		}
-		this->executeForm();
-	} catch ( const FormNotSignedException& e ) {
-		std::cout << e.what() << std::endl;
-		//throw;
-	} catch ( const GradeTooLowException& e ) {
-		throw;
+	if ( !this->_signed ){
+		throw FormNotSignedException();
 	}
+	if ( this->_execGrade < executor.getGrade() ){
+		throw GradeTooLowException();
+	}
+	this->executeForm();
 }
+
+const char * Form::FormNotSignedException::what () const throw (){
+	return "Form is not signed";
+}
+
+const char * Form::FormAllreadySignedException::what () const throw (){
+	return "Form is allready signed";
+}
+
+const char * Form::GradeTooHighException::what () const throw (){
+	return "Grade is too high";
+}
+
+const char * Form::GradeTooLowException::what () const throw (){
+	return "Grade is too Low";
+}
+
