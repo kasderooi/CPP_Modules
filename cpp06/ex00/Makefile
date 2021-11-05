@@ -1,4 +1,4 @@
-NAME		=	scalar
+NAME		=	convert
 SRCDIR		=	srcs
 SRCS		=	main.cpp scalar.cpp
 OBJDIR		=	objs

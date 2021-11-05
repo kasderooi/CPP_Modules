@@ -19,15 +19,19 @@ int	main( int argc, char** argv ){
 				( doF[i] )( argv[1], &input );
 				break ;
 			}
+			if ( i == 5 )
+				throw WrongInput();
 		}
 		printBunch( &input );
 	} catch ( int e ) {
 		std::cout << "float: " << pseudoFloat[e] << std::endl;
 		std::cout << "double: " << pseudoDouble[e] << std::endl;
-	} catch ( const std::out_of_range& e ) {
-		std::cout << "Out of range error: " << e.what() << std::endl;
 	} catch ( const WrongInput& e ) {
-		std::cout << e.what() << std::endl;
+		std::cerr << e.what() << std::endl;
+	} catch ( const std::out_of_range& e ) {
+		std::cerr << "Out of range error: " << e.what() << std::endl;
+	} catch ( const std::invalid_argument& e ){
+		std::cerr << "Invalid argument: " << e.what() << '\n';
 	}
 	return 0;
 }

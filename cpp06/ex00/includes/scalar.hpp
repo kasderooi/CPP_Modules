@@ -5,8 +5,6 @@
 #include <string>
 #include <exception>
 #include <stdexcept>
-#include <cmath>
-#include <cfloat>
 
 typedef struct s_values
 {

@@ -5,14 +5,13 @@ std::string pseudoFloat[3] = { "-inff", "+inff", "nanf" };
 std::string pseudoDouble[3] = { "-inf", "+inf", "nan" };
 
 bool is_valid_digit( std::string argv ){
-	// int len = argv.length();
+	int len = argv.length();
 
-	// if ( argv[len - 1] == 'f' )
-	// 	len--;
-	// for ( int i = 0; i < len; i++ )
-	// 	if ( !isdigit(argv[i]) && argv[i] != '.' )
-	// 		throw WrongInput();
-	(void) argv;
+	if ( argv[len - 1] == 'f' )
+		len--;
+	for ( int i = 0; i < len; i++ )
+		if ( !isdigit(argv[i]) && argv[i] != '.' )
+			throw WrongInput();
 	return true;
 }
 
@@ -54,8 +53,6 @@ bool checkDouble( std::string argv ){
 
 bool checkInt( std::string argv ){
 	for ( int i = 0; argv[i]; i++) {
-		if ( argv[i] == '-' && i == 0 )
-			i++;
 		if (!isdigit(argv[i]))
 			return false;
 	}
@@ -89,17 +86,6 @@ void doPseudoDouble( std::string argv, t_values *input ){
 		if ( !argv.compare(pseudoDouble[i]) ){
 			throw i;
 		}
-}
-
-std::string special( std:: string argv ) {
-    switch(std::fpclassify(std::stof(argv))) {
-        case FP_INFINITE:  return "Inf";
-        case FP_NAN:       return "NaN";
-        case FP_NORMAL:    return "normal";
-        case FP_SUBNORMAL: return "subnormal";
-        case FP_ZERO:      return "zero";
-        default:           return argv;
-    }
 }
 
 void doFloat( std::string argv, t_values *input ){
