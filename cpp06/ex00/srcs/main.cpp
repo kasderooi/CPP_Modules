@@ -13,12 +13,21 @@ int	main( int argc, char** argv ){
 		std::cout << "give 1 argument" << std::endl;
 		return 1;
 	}
-	for ( int i = 0; i < 6; i++ ){
-		if ( ( checkF[i] )( argv[1] ) ) {
-			( doF[i] )( argv[1], &input );
-			break ;
+	try {
+		for ( int i = 0; i < 6; i++ ){
+			if ( ( checkF[i] )( argv[1] ) ) {
+				( doF[i] )( argv[1], &input );
+				break ;
+			}
 		}
+		printBunch( &input );
+	} catch ( int e ) {
+		std::cout << "float: " << pseudoFloat[e] << std::endl;
+		std::cout << "double: " << pseudoDouble[e] << std::endl;
+	} catch ( const std::out_of_range& e ) {
+		std::cout << "Out of range error: " << e.what() << std::endl;
+	} catch ( const WrongInput& e ) {
+		std::cout << e.what() << std::endl;
 	}
-	printBunch( &input );
 	return 0;
 }

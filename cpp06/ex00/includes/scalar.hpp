@@ -3,6 +3,10 @@
 
 #include <iostream>
 #include <string>
+#include <exception>
+#include <stdexcept>
+#include <cmath>
+#include <cfloat>
 
 typedef struct s_values
 {
@@ -11,6 +15,9 @@ typedef struct s_values
 	char	c;
 	double	d;
 }			t_values;
+
+extern std::string pseudoFloat[3];
+extern std::string pseudoDouble[3];
 
 bool checkPseudoFloat( std::string argv );
 bool checkPseudoDouble( std::string argv );
@@ -28,5 +35,10 @@ void doChar( std::string argv, t_values *input );
 
 void printBunch( t_values *input );
 
+class WrongInput : public std::exception {
+	public:
+
+	const char * what () const throw ();
+};
 
 #endif
