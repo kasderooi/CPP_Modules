@@ -5,7 +5,7 @@ Base::~Base( void ){
 }
 
 Base* generate( void ){
-	int i = rand() % 3;
+	int i = arc4random() % 3;
 
 	switch (i){
 		case 0:

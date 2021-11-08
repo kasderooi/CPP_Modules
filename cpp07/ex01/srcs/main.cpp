@@ -3,10 +3,8 @@
 #include <cctype>
 
 size_t plusone( size_t nbr ){
-	return nbr + 1;
+	return (nbr + 1);
 }
-
-
 
 int	main( void ){
 	char str[14] = "dit is string";
@@ -16,9 +14,10 @@ int	main( void ){
  	std::cout << std::endl;
 	::print( arr, 10 );
  	std::cout << std::endl;
-	::iter( str, strlen(str) , toupper() );
+	::iter( str, strlen(str), toupper );
 	::print( str, strlen(str) );
  	std::cout << std::endl;
+	::iter( arr, 10, plusone );
 	::print( arr, 10 );
  	std::cout << std::endl;
 	return 0;
