@@ -6,12 +6,15 @@ std::string pseudoDouble[3] = { "-inf", "+inf", "nan" };
 
 bool is_valid_digit( std::string argv ){
 	int len = argv.length();
+	int i = ( argv[0] == '-' ) ? 1 : 0;
 
 	if ( argv[len - 1] == 'f' )
 		len--;
-	for ( int i = 0; i < len; i++ )
+	while ( i < len ){
 		if ( !isdigit(argv[i]) && argv[i] != '.' )
 			throw WrongInput();
+		i++;
+	}
 	return true;
 }
 
