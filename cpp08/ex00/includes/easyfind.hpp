@@ -4,20 +4,24 @@
 #include <iostream>
 #include <iterator>
 
-template <typename T>
-T& easyfind( T container, int instance ){
-	
-	for( typename T::iterator it = container.begin(); it < container.end(); it++ ){
-		if ( (*it) == instance )
-			return (*it);
+class NotFoundException : public std::exception {
+
+	public:
+
+	const char * what () const throw (){
+		return "Instance not in container";
 	}
-	return NULL;
-}
+
+};
 
 template <typename T>
-std::ostream & operator<<( std::ostream & o, T const & element ){
-	o << (*element);
-	return o;
+typename T::const_iterator easyfind( T &container, int instance ){
+	typename T::const_iterator start = container.begin();
+	typename T::const_iterator end = container.end();
+	typename T::const_iterator found = std::find( start, end, instance );
+	if ( found == end )
+		throw NotFoundException();
+	return found;
 }
 
 #endif
