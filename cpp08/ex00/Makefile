@@ -1,6 +1,6 @@
-NAME		=	
+NAME		=	easy
 SRCDIR		=	srcs
-SRCS		=	
+SRCS		=	main.cpp
 OBJDIR		=	objs
 OBJS		=	$(addprefix $(OBJDIR)/, $(SRCS:.cpp=.o))
 CC			=	clang++
