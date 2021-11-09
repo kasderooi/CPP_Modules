@@ -1,6 +1,6 @@
-NAME		=	
+NAME		=	mutant
 SRCDIR		=	srcs
-SRCS		=	
+SRCS		=	main.cpp MutantStack.cpp
 OBJDIR		=	objs
 OBJS		=	$(addprefix $(OBJDIR)/, $(SRCS:.cpp=.o))
 CC			=	clang++

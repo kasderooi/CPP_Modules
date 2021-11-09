@@ -1,6 +1,6 @@
-NAME		=	
+NAME		=	span
 SRCDIR		=	srcs
-SRCS		=	
+SRCS		=	main.cpp span.cpp
 OBJDIR		=	objs
 OBJS		=	$(addprefix $(OBJDIR)/, $(SRCS:.cpp=.o))
 CC			=	clang++

@@ -16,7 +16,7 @@ int main ( void ){
 	} catch ( NotFoundException &e ) {
 		std::cout << e.what() << std::endl;
 	}
-	try {	
+	try {
 		std::cout << (*easyfind( ar, b )) << std::endl;
 	} catch ( NotFoundException &e ) { 
 		std::cout << e.what() << std::endl;
