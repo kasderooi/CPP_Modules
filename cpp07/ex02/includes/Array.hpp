@@ -17,13 +17,17 @@ class Array {
 	Array( void ) : _array(NULL), _size(0){
 		return ;
 	};
-	Array( unsigned int n ) : _array(new T[n]), _size(n){
+
+	Array( unsigned int n ) : _array(new T[n]()), _size(n){
 		return ;
 	};
+
 	~Array( void ){
+		delete _array;
 		return ;
 	};
-	Array( const Array& original ) : _array(new T[original.size()]), _size(original.size()){
+
+	Array( const Array& original ) : _array(new T[0]()) {
 		*this = original;
 		return;
 	};
@@ -33,15 +37,13 @@ class Array {
 	}
 
 	Array<T>& operator=( const Array<T>& original ){
-		std::memset(_array, 0, _size);
-		for ( int i = 0; i < _size && i < original.size(); i++){
+		delete _array;
+		_size = original.size();
+		_array = new T[_size]();
+		for ( int i = 0; i < _size; i++){
 			_array[i] = original._array[i];
 		}
 		return *this;
-	};
-
-	T& operator=( const T& original ){
-		return original;
 	};
 
 	T& operator[] ( int value ){
