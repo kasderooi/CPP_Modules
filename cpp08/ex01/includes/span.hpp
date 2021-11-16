@@ -24,6 +24,7 @@ class span {
 	span& operator=( const span& original );
 
 	void addNumber( int nbr );
+	void addNumber( unsigned int index, unsigned int end, int value );
 	int	longestSpan( void );
 	int	shortestSpan( void );
 

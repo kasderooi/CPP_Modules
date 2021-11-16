@@ -2,8 +2,8 @@
 #include <Array.hpp>
 
 #define MAX_VAL 750
-int main(int, char**)
-{
+
+void function1( void ){
     Array<int> numbers(MAX_VAL);
     int* mirror = new int[MAX_VAL];
     srand(time(NULL));
@@ -24,7 +24,7 @@ int main(int, char**)
         if (mirror[i] != numbers[i])
         {
             std::cerr << "didn't save the same value!!" << std::endl;
-            return 1;
+            return;
         }
     }
     try
@@ -49,5 +49,41 @@ int main(int, char**)
         numbers[i] = rand();
     }
     delete [] mirror;//
-    return 0;
+    return;
+}
+
+void function2( void ){
+	Array<int> nonumbers;
+	Array<int> numbers(MAX_VAL);
+    int* mirror = new int[MAX_VAL];
+    srand(time(NULL));
+    for (int i = 0; i < MAX_VAL; i++)
+    {
+        const int value = rand();
+        numbers[i] = value;
+        mirror[i] = value;
+    }
+	nonumbers = numbers;
+	for (int i = 0; i < MAX_VAL; i++)
+        numbers[i] = 0;
+    for (int i = 0; i < MAX_VAL; i++)
+    {
+        if (mirror[i] != nonumbers[i])
+        {
+            std::cerr << "didn't save the same value!!" << std::endl;
+            return;
+        }
+    }
+	nonumbers = numbers;
+	numbers = nonumbers;
+    delete [] mirror;//
+    return;
+}
+
+int main(int, char**)
+{
+	function1();
+	function2();
+	system("leaks Array");
+	return 0;
 }

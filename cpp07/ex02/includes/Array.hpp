@@ -23,11 +23,11 @@ class Array {
 	};
 
 	~Array( void ){
-		delete _array;
+		delete[] _array;
 		return ;
 	};
 
-	Array( const Array& original ) : _array(new T[0]()) {
+	Array( const Array& original ) : _array(NULL) {
 		*this = original;
 		return;
 	};
@@ -37,7 +37,7 @@ class Array {
 	}
 
 	Array<T>& operator=( const Array<T>& original ){
-		delete _array;
+		delete[] _array;
 		_size = original.size();
 		_array = new T[_size]();
 		for ( int i = 0; i < _size; i++){

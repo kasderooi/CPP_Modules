@@ -1,6 +1,6 @@
 #include "span.hpp"
 
-span::span( unsigned int n ) : _n(n) {
+span::span( unsigned int n ) : _n(n){
 	return ;
 }
 
@@ -8,12 +8,12 @@ span::~span( void ){
 	return ;
 }
 
-span::span( const span& original ) : _n(original._n) {
+span::span( const span& original ) : _n(original._n){
 	*this = original;
 	return ;
 }
 
-span& span::operator=( const span& original ) {
+span& span::operator=( const span& original ){
 	for ( std::vector<int>::const_iterator it = original._array.begin(); it < original._array.end(); it++ )
 	{
 		_array.push_back(*it);
@@ -26,6 +26,15 @@ void span::addNumber( int nbr ){
 	if ( _array.capacity() == _n )
 		throw SpanIsFullException();
 	_array.push_back(nbr);
+}
+
+void span::addNumber( unsigned int index, unsigned int end, int value ){
+	while ( index <= end ){
+		this->_array[index] = value;
+		index++;
+		if ( index > _n )
+			throw SpanIsFullException();
+	}
 }
 
 int	span::longestSpan( void ) {
