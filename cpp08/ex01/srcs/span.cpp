@@ -1,5 +1,9 @@
 #include "span.hpp"
 
+span::span( void ) {
+	return ;
+}
+
 span::span( unsigned int n ) : _n(n){
 	return ;
 }
@@ -14,10 +18,14 @@ span::span( const span& original ) : _n(original._n){
 }
 
 span& span::operator=( const span& original ){
-	for ( std::vector<int>::const_iterator it = original._array.begin(); it < original._array.end(); it++ )
-	{
-		_array.push_back(*it);
-	}
+	_array.assign( original._array.begin(), original._array.end() );
+	return *this;
+}
+
+span& span::operator=( std::vector<int>& original ){
+	original.shrink_to_fit();
+	_n = original.capacity();
+	_array.assign( original.begin(), original.end() );
 	return *this;
 }
 
@@ -28,11 +36,12 @@ void span::addNumber( int nbr ){
 	_array.push_back(nbr);
 }
 
-void span::addNumber( unsigned int index, unsigned int end, int value ){
-	while ( index <= end ){
-		this->_array[index] = value;
+void span::addNumber( std::vector<int>::const_iterator index, std::vector<int>::const_iterator end ){
+	while (index < end - 1){
+		_array.push_back(*index);
 		index++;
-		if ( index > _n )
+		_array.shrink_to_fit();
+		if ( _array.capacity() == _n )
 			throw SpanIsFullException();
 	}
 }

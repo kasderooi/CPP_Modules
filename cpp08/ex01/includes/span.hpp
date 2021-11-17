@@ -22,9 +22,10 @@ class span {
 	span( const span& original );
 
 	span& operator=( const span& original );
+	span& operator=( std::vector<int>& original );
 
 	void addNumber( int nbr );
-	void addNumber( unsigned int index, unsigned int end, int value );
+	void addNumber( std::vector<int>::const_iterator index, std::vector<int>::const_iterator end );
 	int	longestSpan( void );
 	int	shortestSpan( void );
 
